@@ -16,9 +16,9 @@ public class Food {
 		this.carbPer100 = carbPer100;
 	}
 
-	public double getCalPerGram()  { return calPer100  / 100.0; }
-	public double getProtPerGram() { return protPer100 / 100.0; }
-	public double getFatPerGram()  { return fatPer100  / 100.0; }
-	public double getCarbPerGram() { return carbPer100 / 100.0; }
-	public String getName()        { return name; }
+//	public double getCalPerGram()  { return calPer100  / 100.0; }
+//	public double getProtPerGram() { return protPer100 / 100.0; }
+//	public double getFatPerGram()  { return fatPer100  / 100.0; }
+//	public double getCarbPerGram() { return carbPer100 / 100.0; }
+//	public String getName()        { return name; }
 }
