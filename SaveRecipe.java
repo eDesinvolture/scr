@@ -43,7 +43,7 @@ public class SaveRecipe extends JFrame {
 			);
 		}
 
-		
+
 
 
 
