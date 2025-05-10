@@ -1,10 +1,13 @@
-package gui;
+package com.edesinvolture.calculations;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class FoodCalculator extends JPanel {
@@ -34,7 +37,12 @@ public class FoodCalculator extends JPanel {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
 		// --- Загрузка данных из файла ---
-		try (Scanner sc = new Scanner(new File("FoodList.txt"))) {
+		try (Scanner sc = new Scanner(
+				new InputStreamReader(
+                        Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("FoodList.txt")),
+						StandardCharsets.UTF_8
+				)
+		)) {
 			while (sc.hasNextLine()) {
 				String line = sc.nextLine().trim();
 				if (line.isEmpty()) continue;
@@ -46,11 +54,8 @@ public class FoodCalculator extends JPanel {
 				double h = parseDouble(parts[4]);
 				foodlist.add(new Food(name, c, p, f, h));
 			}
-		} catch (IOException e) {
-			System.err.println("Не удалось прочитать FoodList.txt");
 		}
-
-		// --- Построение строк продуктов ---
+        // --- Построение строк продуктов ---
 		for (Food f : foodlist) {
 			JPanel row = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 2));
 			row.add(new JLabel(String.format(

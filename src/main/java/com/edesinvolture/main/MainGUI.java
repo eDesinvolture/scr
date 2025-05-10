@@ -1,4 +1,9 @@
-package gui;
+package com.edesinvolture.main;
+
+
+import com.edesinvolture.calculations.DietPanel;
+import com.edesinvolture.calculations.FoodCalculator;
+import com.edesinvolture.steps.StepTrackerGUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,7 +25,7 @@ public class MainGUI extends JFrame {
 
         // -- правая часть: шаги и диета
         StepTrackerGUI stepPanel = new StepTrackerGUI();
-        DietPanel     dietPanel = new DietPanel();
+        DietPanel dietPanel = new DietPanel();
         JSplitPane rightSplit = new JSplitPane(
                 JSplitPane.VERTICAL_SPLIT,
                 stepPanel,

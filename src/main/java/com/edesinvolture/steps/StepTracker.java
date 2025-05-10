@@ -1,13 +1,18 @@
-package gui;
+package com.edesinvolture.steps;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.time.Year;
+import java.util.Objects;
 import java.util.StringTokenizer;
 
 public class StepTracker {
     private final int[][] trackArray = new int[12][31]; // индексы 0–30 соответствуют дням 1–31
     private int avrInDay = 10000;
-    private static final String SAVE_FILE = "steps.dat";
+    private static final File SAVE_FILE = new File("data/steps.dat");
+
+
+
 
     public StepTracker() {
         load(); // при создании подгружаем данные
@@ -72,17 +77,34 @@ public class StepTracker {
             default: return 31;
         }
     }
+    private void parseFromReader(BufferedReader in) throws IOException {
+        String line = in.readLine();
+        if (line != null) avrInDay = Integer.parseInt(line.trim());
+        for (int m = 0; m < 12; m++) {
+            line = in.readLine();
+            if (line == null) break;
+            StringTokenizer st = new StringTokenizer(line, ",");
+            int days = daysInMonth(m + 1);
+            for (int d = 1; d <= days && st.hasMoreTokens(); d++) {
+                trackArray[m][d - 1] = Integer.parseInt(st.nextToken().trim());
+            }
+        }
+    }
+
 
     private void save() {
-        try (PrintWriter out = new PrintWriter(new FileWriter(SAVE_FILE))) {
-            out.println(avrInDay);
-            for (int m = 0; m < 12; m++) {
-                int days = daysInMonth(m + 1);
-                for (int d = 1; d <= days; d++) {
-                    out.print(trackArray[m][d - 1]);
-                    out.print(',');
+        try {
+            SAVE_FILE.getParentFile().mkdirs();
+            try (PrintWriter out = new PrintWriter(new FileWriter(SAVE_FILE))) {
+                out.println(avrInDay);
+                for (int m = 0; m < 12; m++) {
+                    int days = daysInMonth(m + 1);
+                    for (int d = 1; d <= days; d++) {
+                        out.print(trackArray[m][d - 1]);
+                        out.print(',');
+                    }
+                    out.println();
                 }
-                out.println();
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -90,22 +112,27 @@ public class StepTracker {
     }
 
     private void load() {
-        File f = new File(SAVE_FILE);
-        if (!f.exists()) return;
-        try (BufferedReader in = new BufferedReader(new FileReader(f))) {
-            String line = in.readLine();
-            if (line != null) avrInDay = Integer.parseInt(line.trim());
-            for (int m = 0; m < 12; m++) {
-                line = in.readLine();
-                if (line == null) break;
-                StringTokenizer st = new StringTokenizer(line, ",");
-                int days = daysInMonth(m + 1);
-                for (int d = 1; d <= days && st.hasMoreTokens(); d++) {
-                    trackArray[m][d - 1] = Integer.parseInt(st.nextToken().trim());
-                }
+        if (SAVE_FILE.exists()) {
+            try (BufferedReader in = new BufferedReader(new FileReader(SAVE_FILE))) {
+                parseFromReader(in);
+                return;
+            } catch (IOException | NumberFormatException e) {
+                e.printStackTrace();
             }
-        } catch (IOException | NumberFormatException e) {
+        }
+
+        // Если пользовательского файла нет — загружаем дефолтный из ресурсов
+        try (BufferedReader in = new BufferedReader(new InputStreamReader(
+                Objects.requireNonNull(
+                        getClass().getClassLoader().getResourceAsStream("steps.dat")
+                ),
+                StandardCharsets.UTF_8
+        ))) {
+            parseFromReader(in);
+        } catch (IOException | NullPointerException e) {
             e.printStackTrace();
         }
     }
+
+
 }

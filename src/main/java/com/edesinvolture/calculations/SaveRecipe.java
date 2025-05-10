@@ -1,7 +1,9 @@
-package gui;
+
+package com.edesinvolture.calculations;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.FileNotFoundException;
@@ -31,7 +33,10 @@ public class SaveRecipe extends JFrame {
 
 	private void saveFile() {
 		String filename = nameField.getText().toLowerCase().replace(" ", "_") + ".txt";
-		try (PrintWriter pw = new PrintWriter(filename, "UTF-8")) {
+		File file = new File("recipes", filename);  // сохраняем в ./recipes/название.txt
+		file.getParentFile().mkdirs(); // создаём папку, если нужно
+
+		try (PrintWriter pw = new PrintWriter(file, "UTF-8")) {
 			pw.print(sourceArea.getText());
 			dispose();
 		} catch (FileNotFoundException | UnsupportedEncodingException e) {
@@ -42,11 +47,5 @@ public class SaveRecipe extends JFrame {
 					JOptionPane.ERROR_MESSAGE
 			);
 		}
-
-
-
-
-
-
 	}
 }

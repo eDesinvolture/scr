@@ -1,4 +1,4 @@
-package gui;
+package com.edesinvolture.main;
 
 import javax.swing.*;
 

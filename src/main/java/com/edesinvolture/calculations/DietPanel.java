@@ -1,4 +1,4 @@
-package gui;
+package com.edesinvolture.calculations;
 
 import javax.swing.*;
 import java.awt.*;

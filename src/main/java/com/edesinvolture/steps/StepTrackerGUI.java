@@ -1,4 +1,4 @@
-package gui;
+package com.edesinvolture.steps;
 
 import javax.swing.*;
 import java.awt.*;

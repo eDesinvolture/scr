@@ -1,4 +1,4 @@
-package gui;
+package com.edesinvolture.steps;
 
 public class Converter {
     double kmInSteps(double sum){
