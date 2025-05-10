@@ -1,5 +1,4 @@
-<<<<<<<< HEAD:SaveRecipe.java
-========
+
 package com.edesinvolture.calculations;
 
 import javax.swing.*;

@@ -15,6 +15,7 @@ public class Food {
 		this.fatPer100  = fatPer100;
 		this.carbPer100 = carbPer100;
 	}
+}
 
 //	public double getCalPerGram()  { return calPer100  / 100.0; }
 //	public double getProtPerGram() { return protPer100 / 100.0; }
