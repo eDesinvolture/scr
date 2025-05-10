@@ -1,3 +1,5 @@
+<<<<<<<< HEAD:SaveRecipe.java
+========
 package com.edesinvolture.calculations;
 
 import javax.swing.*;
@@ -46,11 +48,5 @@ public class SaveRecipe extends JFrame {
 					JOptionPane.ERROR_MESSAGE
 			);
 		}
-
-
-
-
-
-
 	}
 }
