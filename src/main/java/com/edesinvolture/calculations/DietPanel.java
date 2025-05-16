@@ -95,6 +95,12 @@ public class DietPanel extends JPanel {
             double[] factors = {1.2, 1.375, 1.55, 1.725};
             double activityFactor = factors[activityBox.getSelectedIndex()];
 
+            if (weight <= 0 || heightM <= 0 || age <= 0 || heightCm <= 0) {
+                JOptionPane.showMessageDialog(this, "Вес, рост и возраст должны быть положительными числами", "Ошибка", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+
             // Общие расчёты
             double bmi         = weight / (heightM * heightM);
             double idealBMIW   = 22.5 * heightM * heightM;

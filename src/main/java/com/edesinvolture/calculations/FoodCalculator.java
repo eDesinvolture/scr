@@ -117,6 +117,10 @@ public class FoodCalculator extends JPanel {
 			String txt = fields.get(i).getText().trim();
 			if (txt.isEmpty()) continue;
 			double g = Double.parseDouble(txt);
+			if (g < 0) {
+				JOptionPane.showMessageDialog(this, "Граммы не могут быть отрицательными", "Ошибка", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
 			Food f = foodlist.get(i);
 			double c = f.cpg()*g;
 			double p = f.ppg()*g;
