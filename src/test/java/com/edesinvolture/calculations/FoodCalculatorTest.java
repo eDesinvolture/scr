@@ -14,6 +14,7 @@ class FoodCalculatorTest {
         double grams = 150;
         double expectedCalories = 52 * 1.5;
         double actualCalories = food.cpg() * grams;
+        System.out.println("Расчёт калорий: " + actualCalories);
         assertEquals(expectedCalories, actualCalories, 0.01);
     }
 
@@ -59,7 +60,7 @@ class FoodCalculatorTest {
         FoodCalculator.Food food = new FoodCalculator.Food("Хлеб", 250, 7, 1, 50);
         double grams = -100;
         double calories = food.cpg() * grams;
-        assertTrue(calories < 0, "Калории не должны быть отрицательными — в реальном приложении надо блокировать ввод");
+        assertTrue(calories < 0, "Калории не должны быть отрицательными");
     }
 
     @Test
