@@ -7,3 +7,4 @@ public class Main {
 		SwingUtilities.invokeLater(() -> new MainGUI());
 	}
 }
+
